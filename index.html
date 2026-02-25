@@ -59,7 +59,7 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        // 內建圖標組件，解決外部庫載入失敗問題
+        // 內建圖標組件，解決外部庫載入失敗與語法錯誤問題
         const Icon = ({ name, size = 16, className = "" }) => {
             const icons = {
                 ChefHat: <path d="M6 13.812l-2.82 2.821a2 2 0 0 1-2.82-2.82l3.06-3.06a4.46 4.46 0 1 1 5.39 5.39l-3.06 3.06a2 2 0 0 1-2.82-2.82L6 13.812zm0 0l4-4a2 2 0 1 1 2.82 2.82l-4 4M6 13.812v6M10 9.812v6" />,
@@ -120,7 +120,7 @@
                         const response = await fetch(url, options);
                         if (response.ok) return await response.json();
                         if (response.status === 429 || response.status >= 500) {
-                            if (i === maxRetries - 1) throw new Error(`API 請求失敗 (HTTP ${response.status})`);
+                            if (i === maxRetries - 1) throw new Error(`API 請求頻繁，小精靈稍後重試 (${response.status})`);
                             await new Promise(resolve => setTimeout(resolve, delay));
                             delay *= 2;
                             continue;
@@ -183,11 +183,15 @@
                 3. 嚴禁在回傳中包含 Markdown 代碼塊標籤 (\`\`\`json)。`;
 
                 try {
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                    // 更換為廣泛支援的穩定模型名稱 gemini-1.5-flash
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
                     const payload = {
                         contents: [{ parts: [{ text: prompt }] }],
                         systemInstruction: { parts: [{ text: systemPrompt }] },
-                        generationConfig: { responseMimeType: "application/json" }
+                        generationConfig: { 
+                          responseMimeType: "application/json",
+                          temperature: 0.2
+                        }
                     };
 
                     const result = await fetchWithRetry(url, {
