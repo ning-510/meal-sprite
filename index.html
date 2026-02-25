@@ -317,7 +317,7 @@
                         </summary>
                         <div className="px-4 pb-4 space-y-3">
                             <input type="password" placeholder="Gemini API Key" value={apiKey} onChange={(e) => { setApiKey(e.target.value); localStorage.setItem('gemini_api_key', e.target.value); }} className="w-full p-3 bg-white/80 border border-slate-100 rounded-xl text-xs outline-none focus:ring-1 focus:ring-purple-200 transition" />
-                            <input type="text" placeholder="https://docs.google.com/spreadsheets/d/1Cbpc3mcfNGT9kJ_XLmo8plA-He5ygWKHld0PrBFb4do/edit?gid=0#gid=0" value={gasUrl} onChange={(e) => { setGasUrl(e.target.value); localStorage.setItem('gas_url', e.target.value); }} className="w-full p-3 bg-white/80 border border-slate-100 rounded-xl text-xs outline-none focus:ring-1 focus:ring-purple-200 transition" />
+                            <input type="text" placeholder="https://script.google.com/macros/s/AKfycbzKPedXIVq-5TzCTwME065uCzZUQnxVOROP1wwYObil65GfxUXPoc-s_1U7LTLp242kdw/exec" value={gasUrl} onChange={(e) => { setGasUrl(e.target.value); localStorage.setItem('gas_url', e.target.value); }} className="w-full p-3 bg-white/80 border border-slate-100 rounded-xl text-xs outline-none focus:ring-1 focus:ring-purple-200 transition" />
                         </div>
                     </details>
 
